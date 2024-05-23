@@ -1,75 +1,66 @@
+const body = document.querySelector('body')
+
+const footer = document.createElement('div')
+footer.style.display = 'flex'
+footer.style.margin = 'auto'
+footer.style.paddingTop = '25px'
+footer.style.textAlign = 'center'
+
+const slider = document.createElement('input')
+slider.style.marginLeft = 'auto'
+slider.type = 'range'
+slider.min = '2'
+slider.max = '100'
+slider.value = 16
+footer.appendChild(slider)
+
+const submit = document.createElement('button')
+submit.textContent = 'Update Grid'
+submit.style.marginRight = 'auto'
+submit.addEventListener('click', () => {
+  let boxes = document.querySelectorAll('.grid');
+  boxes.forEach(box => {
+    box.remove()
+  })
+  let opac = 10
+  createGrid()
+})
+footer.appendChild(submit)
+
+body.appendChild(footer)
+
 const container = document.querySelector('#container')
 
-  const col1 = document.createElement('div')
+let opac = 10
 
-    const box1 = document.createElement('div')
-    col1.appendChild(box1)
-    const box2 = document.createElement('div')
-    col1.appendChild(box2)
-    const box3 = document.createElement('div')
-    col1.appendChild(box3)
-    const box4 = document.createElement('div')
-    col1.appendChild(box4)
-    const box5 = document.createElement('div')
-    col1.appendChild(box5)
-    const box6 = document.createElement('div')
-    col1.appendChild(box6)
-    const box7 = document.createElement('div')
-    col1.appendChild(box7)
-    const box8 = document.createElement('div')
-    col1.appendChild(box8)
-    const box9 = document.createElement('div')
-    col1.appendChild(box9)
-    const box10 = document.createElement('div')
-    col1.appendChild(box10)
-    const box11 = document.createElement('div')
-    col1.appendChild(box11)
-    const box12 = document.createElement('div')
-    col1.appendChild(box12)
-    const box13 = document.createElement('div')
-    col1.appendChild(box13)
-    const box14 = document.createElement('div')
-    col1.appendChild(box14)
-    const box15 = document.createElement('div')
-    col1.appendChild(box15)
-    const box16 = document.createElement('div')
-    col1.appendChild(box16)
+function rg(m, n) {
+    return Math.floor( Math.random() * (n - m + 1) ) + m;
+}
 
-  container.appendChild(col1)
+function hex(i) {
+    return i.toString(16);
+}
 
-  const col2 = document.createElement('div')
+function randColor() {
+  return '#' + hex(rg(1, 15)) + hex(rg(1, 15)) + hex(rg(1, 15)) +
+      hex(rg(1, 15)) + hex(rg(1, 15)) + hex(rg(1, 15));
+}
 
-  const b1 = document.createElement('div')
-  col2.appendChild(b1)
-  const b2 = document.createElement('div')
-  col2.appendChild(b2)
-  const b3 = document.createElement('div')
-  col2.appendChild(b3)
-  const b4 = document.createElement('div')
-  col2.appendChild(b4)
-  const b5 = document.createElement('div')
-  col2.appendChild(b5)
-  const b6 = document.createElement('div')
-  col2.appendChild(b6)
-  const b7 = document.createElement('div')
-  col2.appendChild(b7)
-  const b8 = document.createElement('div')
-  col2.appendChild(b8)
-  const b9 = document.createElement('div')
-  col2.appendChild(b9)
-  const b10 = document.createElement('div')
-  col2.appendChild(b10)
-  const b11 = document.createElement('div')
-  col2.appendChild(b11)
-  const b12 = document.createElement('div')
-  col2.appendChild(b12)
-  const b13 = document.createElement('div')
-  col2.appendChild(b13)
-  const b14 = document.createElement('div')
-  col2.appendChild(b14)
-  const b15 = document.createElement('div')
-  col2.appendChild(b15)
-  const b16 = document.createElement('div')
-  col2.appendChild(b16)
+function createGrid(){
+  for(i=0; i< (slider.value * slider.value); i++){
+    const grid = document.createElement('div')
+    grid.classList.add('grid')
+    grid.addEventListener('mouseover', () => {
+      grid.style.backgroundColor = randColor()
+      grid.style.opacity = (opac++) + '%'
+    })
+    let a = slider.value
+    const boxSize = 500 / a
+    grid.style.width = boxSize + 'px'
+    grid.style.height = boxSize + 'px'
 
-container.appendChild(col2)
+  container.appendChild(grid)
+  }
+}
+
+const col =  createGrid()
